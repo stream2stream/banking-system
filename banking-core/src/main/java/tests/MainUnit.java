@@ -84,4 +84,24 @@ public class MainUnit
         else
             System.out.println( "test_does_balance_match_after_dedit:FAILED");
     }
+
+    static  void    test_does_balance_match_after_dedit_and_credit()
+    {
+        // arrange
+        double  openingBalance = 56.78;
+        double  amountToDebit = 44.00;
+        double  amountToCredit = 78.45;
+        Account acc = new Account( 1, "Selvyn", openingBalance );
+        
+        // act 
+        acc.dedit(amountToDebit);
+        acc.credit(amountToCredit);
+        
+        // assert
+        if( (openingBalance-amountToDebit+amountToCredit) == acc.availableBalance() 
+            && (openingBalance-amountToDebit+amountToCredit) == acc.currentbalance() )
+            System.out.println( "test_does_balance_match_after_dedit_and_credit:PASSED" );
+        else
+            System.out.println( "test_does_balance_match_after_dedit_and_credit:FAILED");
+    }
 }

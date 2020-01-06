@@ -55,7 +55,7 @@ public  class Account
     
     public  double  credit( double amt )
     {
-        balance += amt;
+        balance = amt;
         transactions.add(new Transaction(amt));
         
         return  balance;
