@@ -6,6 +6,8 @@
 package tests;
 
 import com.celestial.banking.core.Account;
+import com.celestial.banking.core.CreditAccount;
+import com.celestial.banking.core.InterestRate;
 import com.celestial.banking.core.Transaction;
 
 /**
@@ -39,7 +41,7 @@ public class MainUnit
         // arrange & act
         double  openingBalance = 56.78;
         
-        Account acc = new Account( 1, "Selvyn", openingBalance );
+        Account acc = new CreditAccount( 1, "Selvyn", openingBalance, InterestRate.BUSINESS_LOAN );
         
         // assert
         if( openingBalance == acc.availableBalance() 
