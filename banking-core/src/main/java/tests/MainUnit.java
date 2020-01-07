@@ -25,6 +25,12 @@ public class MainUnit
         test_does_balance_match_after_credit();
         
         test_does_balance_match_after_dedit();
+        
+        test_does_balance_match_after_dedit_and_credit();
+        
+        test_going_overdrwn_on_credit_account();
+    
+        test_does_balance_match_after_dedit_on_CreditAccount();
     }
     
     static  void    test_Transactions()
@@ -106,4 +112,42 @@ public class MainUnit
         else
             System.out.println( "test_does_balance_match_after_dedit_and_credit:FAILED");
     }
+
+    static  void    test_going_overdrwn_on_credit_account()
+    {
+        // arrange
+        double  openingBalance = 56.78;
+        double  amountToDebit = 77.00;
+        Account acc = new CreditAccount( 1, "Selvyn", openingBalance, InterestRate.HOME_LOAN );
+        
+        // act 
+        acc.dedit(amountToDebit);
+        
+        // assert
+        amountToDebit += amountToDebit * InterestRate.HOME_LOAN.rate()/100;
+        if( (openingBalance-amountToDebit) == acc.availableBalance() 
+            && (openingBalance-amountToDebit) == acc.currentbalance() )
+            System.out.println( "test_going_overdrwn_on_credit_account:PASSED" );
+        else
+            System.out.println( "test_going_overdrwn_on_credit_account:FAILED");
+    }
+    
+
+    static  void    test_does_balance_match_after_dedit_on_CreditAccount()
+    {
+        // arrange
+        double  openingBalance = 56.78;
+        double  amountToDebit = 44.00;
+        Account acc = new CreditAccount( 1, "Selvyn", openingBalance, InterestRate.HOME_LOAN );
+        
+        // act 
+        acc.dedit(amountToDebit);
+        
+        // assert
+        if( (openingBalance-amountToDebit) == acc.availableBalance() 
+            && (openingBalance-amountToDebit) == acc.currentbalance() )
+            System.out.println( "test_does_balance_match_after_dedit:PASSED" );
+        else
+            System.out.println( "test_does_balance_match_after_dedit:FAILED");
+    }    
 }

@@ -19,4 +19,15 @@ public class CreditAccount  extends     Account
         
         this.rate = rate;
     }
+
+    @Override
+    public double dedit(double amt)
+    {
+        if( super.availableBalance() - amt < 0 )
+        {
+            amt += (rate.rate()/100)*amt;
+        }
+        super.dedit(amt);
+        return super.availableBalance();    
+    }
 }
